@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <!--标准yyan.css-->
+    <link rel="stylesheet" href="../css/yyan.min.css">
+    <!--App自定义的css-->
+    <!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+    <!--<link href="../css/yyan.picker.css" rel="stylesheet" />
+    <link href="../css/yyan.dtpicker.css" rel="stylesheet" />-->
+    <link rel="stylesheet" type="text/css" href="../css/yyan.picker.min.css"/>
+    <style>
+        html,
+        body,
+        .yyan-content {
+            height: 0px;
+            margin: 0px;
+            background-color: #efeff4;
+        }
+
+        h5.yyan-content-padded {
+            margin-left: 3px;
+            margin-top: 20px !important;
+        }
+
+        h5.yyan-content-padded:first-child {
+            margin-top: 12px !important;
+        }
+
+        .yyan-btn {
+            font-size: 16px;
+            padding: 8px;
+            margin: 3px;
+        }
+
+        .ui-alert {
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 16px;
+        }
+
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+<header class="yyan-bar yyan-bar-nav">
+    <a class="yyan-action-back yyan-icon yyan-icon-left-nav yyan-pull-left"></a>
+    <h1 class="yyan-title">拉酒单</h1>
+</header>
+
+<div class="yyan-content">
+
+    <div class="yyan-card">
+        <form class="yyan-input-group">
+
+            <div class="yyan-input-row">
+                <label>车次</label>
+                <input type="text" id="carSort" class="yyan-input-clear" placeholder="请输入车次">
+            </div>
+
+            <div class="yyan-input-row">
+                <label>车次</label>
+                <input type="text" id="dort" class="yyan-input-clear" placeholder="请输入车次">
+            </div>
+
+            <div class="yyan-input-row">
+                <label>日期</label>
+                <input id='date' type="text" placeholder="请选择日期">
+            </div>
+            <div class="yyan-input-row">
+                <label>桶数</label>
+                <input type="text" id="numInput" class="yyan-input-clear" placeholder="请选择桶数">
+            </div>
+
+            <div class="yyan-input-row">
+                <label>驾驶员</label>
+                <input type="text" id="driver" class="yyan-input-clear" placeholder="请输入驾驶员">
+            </div>
+
+
+            <div class="yyan-input-row">
+                <label>车牌号</label>
+                <input type="text" id="carNum" class="yyan-input-clear" placeholder="请输入车牌号">
+            </div>
+
+            <div class="yyan-input-row">
+                <label>车型</label>
+                <input type="text" id="carType" class="yyan-input-clear" placeholder="请选择车型">
+            </div>
+
+            <div class="yyan-input-row">
+                <label>状态</label>
+                <input type="text" id="status" class="yyan-input-clear" placeholder="请选择状态">
+            </div>
+            <!--border-line-->
+            <div></div>
+        </form>
+        <div style="text-align: center;padding: 5px">
+            <input type="submit" value="确定"/>
+            <input type="reset" value="重置"/>
+        </div>
+    </div>
+
+</div>
+<script src="../js/yyan.min.js"></script>
+<!---->
+<script src="../js/yyan.picker.all.js"></script>
+<script>
+
+    // 初始化日期
+    var dtpicker = new yyan.DtPicker({
+        "type": "datetime",
+    });
+
+    // 日期点击事件
+    var dateInput = document.getElementById("date");
+    dateInput.addEventListener('tap', function (e) {
+        var _self = this;
+        dtpicker.show(function (result) {
+            dateInput.value = result.text;
+            _self.dtpicker = null; // 时间
+        })
+    })
+
+
+    // 数字类型
+    // https://blog.csdn.net/beyond__devil/article/details/83541838
+    var numberPicker = new yyan.PopPicker({
+        layer: 5,
+        noLink: true, // 参数不联动
+    });
+    var numItem = [
+        {value: '0', text: '0'},
+        {value: '1', text: '1'},
+        {value: '2', text: '2'},
+        {value: '3', text: '3'},
+        {value: '4', text: '4'},
+        {value: '5', text: '5'},
+        {value: '6', text: '6'},
+        {value: '7', text: '7'},
+        {value: '8', text: '8'},
+        {value: '9', text: '9'},
+        {value: '0', text: '0'},
+    ];
+    numberPicker.setData([numItem, numItem, numItem, numItem, numItem]);
+    var numInput = document.getElementById("numInput");
+    numInput.addEventListener('tap', function (e) {
+        var _self = this;
+        numberPicker.show(function (result) {
+            var numData = null;
+            var numStart = 0;
+            for (var i = 0; i < result.length; i++) {
+                numStart += parseInt(result[i].value) * Math.pow(10, result.length - i - 1);
+            }
+            if (numStart) {
+                numData = numStart;
+            }
+            numInput.value = numData;
+            _self.numberPicker = null; // 数字
+        })
+    })
+
+
+    // 车型
+    var carTypePicker = new yyan.PopPicker({
+        layer: 1
+    });
+    carTypePicker.setData([
+        {
+            value: "0",
+            text: "大型"
+        },
+        {
+            value: "1",
+            text: "中型"
+        },
+        {
+            value: "2",
+            text: "小型"
+        }
+    ]);
+    var carTypeInput = document.getElementById("carType");
+    carTypeInput.addEventListener('tap', function (e) {
+        var _self = this;
+        carTypePicker.show(function (result) {
+            carTypeInput.value = result[0].text;
+            _self.carTypePicker = null; // 状态
+        })
+    })
+
+
+    // 状态
+    var statusPicker = new yyan.PopPicker({
+        layer: 1
+    });
+    statusPicker.setData([
+        {
+            value: "0",
+            text: "已下达"
+        },
+        {
+            value: "1",
+            text: "未开始"
+        }
+    ]);
+    var statusInput = document.getElementById("status");
+    statusInput.addEventListener('tap', function (e) {
+        var _self = this;
+        statusPicker.show(function (result) {
+            statusInput.value = result[0].text;
+            _self.statusPicker = null; // 状态
+        })
+    })
+
+
+</script>
+</body>
+
+</html>
