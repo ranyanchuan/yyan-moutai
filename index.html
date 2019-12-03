@@ -53,52 +53,57 @@
 <body>
 <header class="yyan-bar yyan-bar-nav">
     <a class="yyan-action-back yyan-icon yyan-icon-left-nav yyan-pull-left"></a>
-    <h1 class="yyan-title">dtpicker（日期时间选择器）</h1>
+    <h1 class="yyan-title">大勾打酒</h1>
 </header>
 
 <div class="yyan-content">
 
-
-    <form class="yyan-input-group">
-        <div class="yyan-input-row">
-            <label>作业日期</label>
-            <input id='date' type="text" placeholder="请选择作业日期">
-        </div>
-        <div class="yyan-input-row">
-            <label>打酒桶数</label>
-            <input type="text" class="yyan-input-clear" placeholder="请选择打酒桶数">
-        </div>
-
-        <div class="yyan-input-row">
-            <label>数字框一</label>
-            <input class="yyan-input-numbox" type="number" />
-            <!--<div class="yyan-numbox">-->
-                <!--&lt;!&ndash;<button class="yyan-btn yyan-btn-numbox-minus" type="button">-</button>&ndash;&gt;-->
-                <!--<input class="yyan-input-numbox" type="number" />-->
-                <!--&lt;!&ndash;<button class="yyan-btn yyan-btn-numbox-plus" type="button">+</button>&ndash;&gt;-->
-            <!--</div>-->
-        </div>
-
-
-        <div class="yyan-input-row">
-            <label>数字框一</label>
-            <div class="yyan-numbox">
-                <button class="yyan-btn yyan-btn-numbox-minus" type="button">-</button>
-                <input class="yyan-input-numbox" type="number" />
-                <button class="yyan-btn yyan-btn-numbox-plus" type="button">+</button>
+    <div class="yyan-card">
+        <form class="yyan-input-group">
+            <div class="yyan-input-row">
+                <label>日期</label>
+                <input id='date' type="text" placeholder="请选择日期">
             </div>
+            <div class="yyan-input-row">
+                <label>桶数</label>
+                <input type="text" id="numInput" class="yyan-input-clear" placeholder="请选择桶数">
+            </div>
+
+            <div class="yyan-input-row">
+                <label>驾驶员</label>
+                <input type="text" id="driver" class="yyan-input-clear" placeholder="请输入驾驶员">
+            </div>
+
+
+            <div class="yyan-input-row">
+                <label>车牌号</label>
+                <input type="text" id="carNum" class="yyan-input-clear" placeholder="请输入车牌号">
+            </div>
+
+            <div class="yyan-input-row">
+                <label>车型</label>
+                <input type="text" id="carType" class="yyan-input-clear" placeholder="请选择车型">
+            </div>
+
+            <div class="yyan-input-row">
+                <label>状态</label>
+                <input type="text" id="status" class="yyan-input-clear" placeholder="请选择状态">
+            </div>
+            <!--border-line-->
+            <div></div>
+        </form>
+        <div style="text-align: center;padding: 5px">
+            <input type="submit" value="开始任务"/>
+            <input type="submit" value="填报拉酒单"/>
+            <input type="submit" value="拉酒单"/>
+            <input type="submit" value="任务详情"/>
         </div>
-
-
-
-
-
-    </form>
-
+    </div>
 
 </div>
 <script src="js/yyan.min.js"></script>
-<script src="js/yyan.picker.min.js"></script>
+<!---->
+<script src="js/yyan.picker.all.js"></script>
 <script>
 
     // 初始化日期
@@ -109,14 +114,101 @@
     // 日期点击事件
     var dateInput = document.getElementById("date");
     dateInput.addEventListener('tap', function (e) {
-
         var _self = this;
         dtpicker.show(function (result) {
             dateInput.value = result.text;
             _self.dtpicker = null; // 时间
         })
+    })
 
 
+    // 数字类型
+    // https://blog.csdn.net/beyond__devil/article/details/83541838
+    var numberPicker = new yyan.PopPicker({
+        layer: 5,
+        noLink: true, // 参数不联动
+    });
+    var numItem = [
+        {value: '0', text: '0'},
+        {value: '1', text: '1'},
+        {value: '2', text: '2'},
+        {value: '3', text: '3'},
+        {value: '4', text: '4'},
+        {value: '5', text: '5'},
+        {value: '6', text: '6'},
+        {value: '7', text: '7'},
+        {value: '8', text: '8'},
+        {value: '9', text: '9'},
+        {value: '0', text: '0'},
+    ];
+    numberPicker.setData([numItem, numItem, numItem, numItem, numItem]);
+    var numInput = document.getElementById("numInput");
+    numInput.addEventListener('tap', function (e) {
+        var _self = this;
+        numberPicker.show(function (result) {
+            var numData = null;
+            var numStart = 0;
+            for (var i = 0; i < result.length; i++) {
+                numStart += parseInt(result[i].value) * Math.pow(10, result.length - i - 1);
+            }
+            if (numStart) {
+                numData = numStart;
+            }
+            numInput.value = numData;
+            _self.numberPicker = null; // 数字
+        })
+    })
+
+
+    // 车型
+    var carTypePicker = new yyan.PopPicker({
+        layer: 1
+    });
+    carTypePicker.setData([
+        {
+            value: "0",
+            text: "大型"
+        },
+        {
+            value: "1",
+            text: "中型"
+        },
+        {
+            value: "2",
+            text: "小型"
+        }
+    ]);
+    var carTypeInput = document.getElementById("carType");
+    carTypeInput.addEventListener('tap', function (e) {
+        var _self = this;
+        carTypePicker.show(function (result) {
+            carTypeInput.value = result[0].text;
+            _self.carTypePicker = null; // 状态
+        })
+    })
+
+
+    // 状态
+    var statusPicker = new yyan.PopPicker({
+        layer: 1
+    });
+    statusPicker.setData([
+        {
+            value: "0",
+            text: "已下达"
+        },
+        {
+            value: "1",
+            text: "未开始"
+        }
+    ]);
+    var statusInput = document.getElementById("status");
+    statusInput.addEventListener('tap', function (e) {
+        var _self = this;
+        statusPicker.show(function (result) {
+            statusInput.value = result[0].text;
+            _self.statusPicker = null; // 状态
+        })
     })
 
 

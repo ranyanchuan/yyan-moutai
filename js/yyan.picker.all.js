@@ -463,6 +463,8 @@
 			self.panel.addEventListener($.EVENT_MOVE, function(event) {
 				event.preventDefault();
 			}, false);
+            self.noLink = self.options.noLink || false;
+
 		},
 		_createPicker: function() {
 			var self = this;
@@ -476,6 +478,8 @@
 				var picker = $(pickerElement).picker();
 				self.pickers.push(picker);
 				pickerElement.addEventListener('change', function(event) {
+                    // 2.如果非联动，停止
+                    if(self.noLink) return false;
 					var nextPickerElement = this.nextSibling;
 					if (nextPickerElement && nextPickerElement.picker) {
 						var eventData = event.detail || {};
@@ -490,6 +494,14 @@
 			var self = this;
 			data = data || [];
 			self.pickers[0].setItems(data);
+            // 3.非联动，改变填充数据规则
+            if(self.noLink){
+                for(var i = 0, length = self.pickers.length; i < length; i++){
+                    self.pickers[i].setItems(data[i]);
+                }
+            }else{
+                self.pickers[0].setItems(data);
+            }
 		},
 		//获取选中的项（数组）
 		getSelectedItems: function() {
