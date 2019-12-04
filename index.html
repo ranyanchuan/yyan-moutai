@@ -3,211 +3,118 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title></title>
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
     <!--标准yyan.css-->
     <link rel="stylesheet" href="css/yyan.min.css">
+    <link rel="stylesheet" type="text/css" href="css/icons-extra.css"/>
     <!--App自定义的css-->
-    <!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
-    <!--<link href="../css/yyan.picker.css" rel="stylesheet" />
-    <link href="../css/yyan.dtpicker.css" rel="stylesheet" />-->
-    <link rel="stylesheet" type="text/css" href="css/yyan.picker.min.css"/>
-    <style>
-        html,
-        body,
-        .yyan-content {
-            height: 0px;
-            margin: 0px;
-            background-color: #efeff4;
-        }
-
-        * {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-        }
-    </style>
+    <!--<link rel="stylesheet" type="text/css" href="../css/app.css"/>-->
 </head>
 
 <body>
+
 <header class="yyan-bar yyan-bar-nav">
-    <a class="yyan-action-back yyan-icon yyan-icon-left-nav yyan-pull-left"></a>
-    <h1 class="yyan-title">大勾打酒</h1>
+    <!--<a class="yyan-action-back yyan-icon yyan-icon-left-nav yyan-pull-left"></a>-->
+    <h1 class="yyan-title">爱茅台</h1>
 </header>
-
 <div class="yyan-content">
+    <ul class="yyan-table-view yyan-grid-view yyan-grid-9">
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/tongzhi.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-email">
+                    <span class="yyan-badge">5</span>
+                </span>
+                <div class="yyan-media-body">取样通知单</div>
+            </a>
+        </li>
 
-    <div class="yyan-card">
-        <form class="yyan-input-group">
-            <div class="yyan-input-row">
-                <label>日期</label>
-                <input id='date' type="text" placeholder="请选择日期">
-            </div>
-            <div class="yyan-input-row">
-                <label>桶数</label>
-                <input type="text" id="numInput" class="yyan-input-clear" placeholder="请选择桶数">
-            </div>
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/baozhuang.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-chatbubble"></span>
+                <div class="yyan-media-body">待发包装</div>
+            </a></li>
 
-            <div class="yyan-input-row">
-                <label>驾驶员</label>
-                <input type="text" id="driver" class="yyan-input-clear" placeholder="请输入驾驶员">
-            </div>
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/dagou.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-home"></span>
+                <div class="yyan-media-body">大勾</div>
+            </a>
+        </li>
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/pangou.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-info"></span>
+                <div class="yyan-media-body">盘勾</div>
+            </a></li>
+
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/weitiao.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-search"></span>
+                <div class="yyan-media-body">微调</div>
+            </a>
+        </li>
 
 
-            <div class="yyan-input-row">
-                <label>车牌号</label>
-                <input type="text" id="carNum" class="yyan-input-clear" placeholder="请输入车牌号">
-            </div>
 
-            <div class="yyan-input-row">
-                <label>车型</label>
-                <input type="text" id="carType" class="yyan-input-clear" placeholder="请选择车型">
-            </div>
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/peijiu.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-home"></span>
+                <div class="yyan-media-body">配酒</div>
+            </a>
+        </li>
 
-            <div class="yyan-input-row">
-                <label>状态</label>
-                <input type="text" id="status" class="yyan-input-clear" placeholder="请选择状态">
-            </div>
-            <!--border-line-->
-            <div></div>
-        </form>
-        <div style="text-align: center;padding: 5px">
-            <input type="submit" id="start" value="开始"/>
-            <input type="reset" value="重置"/>
-            <!--<input type="submit" value="拉酒单"/>-->
-            <!--<input type="submit" value="任务详情"/>-->
-        </div>
-    </div>
 
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/zhuanjiu.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-search"></span>
+                <div class="yyan-media-body">转酒</div>
+            </a>
+        </li>
+
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/tengzhuan.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-location"></span>
+                <div class="yyan-media-body">腾转</div>
+            </a>
+        </li>
+
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/xinjiu.html">
+            <a href="#">
+                <span class="yyan-icon-extra yyan-icon-extra-new"></span>
+                <div class="yyan-media-body">新酒</div>
+            </a>
+        </li>
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/tandiejiu.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-gear"></span>
+                <div class="yyan-media-body">坛底酒</div>
+            </a>
+        </li>
+
+        <li class="yyan-table-view-cell yyan-media yyan-col-xs-4 yyan-col-sm-4" id="html/qitajiu.html">
+            <a href="#">
+                <span class="yyan-icon yyan-icon-more"></span>
+                <div class="yyan-media-body">其他酒</div>
+            </a>
+        </li>
+    </ul>
 </div>
+</body>
 <script src="js/yyan.min.js"></script>
-<script src="js/yyan.picker.all.js"></script>
-<script src="common/api.js"></script>
-<script src="common/utils.js"></script>
-
 <script>
 
-    // 初始化日期
-    var dtpicker = new yyan.DtPicker({
-        "type": "datetime",
-    });
 
-    // 日期点击事件
-    var dateInput = document.getElementById("date");
-    dateInput.addEventListener('tap', function (e) {
-        var _self = this;
-        dtpicker.show(function (result) {
-            dateInput.value = result.text;
-            _self.dtpicker = null; // 时间
-        })
+    // 九宫格点击事件
+    yyan(".yyan-table-view").on('tap', '.yyan-table-view-cell', function () {
+        var url = this.getAttribute("id");  //获取跳转 url
+        yyan.openWindow({  // 打开新页面
+            url: url
+        });
     })
-
-
-    // 数字类型
-    var numberPicker = new yyan.PopPicker({
-        layer: 5,
-        noLink: true, // 参数不联动
-    });
-    var numItem = myModule.inputNumPopItem; // 数字初始化值
-    numberPicker.setData([numItem, numItem, numItem, numItem, numItem]);
-    var numInput = document.getElementById("numInput");
-    numInput.addEventListener('tap', function (e) {
-        var _self = this;
-        numberPicker.show(function (result) {
-            numInput.value = myModule.inputNum(result); // 获取数字类型值
-            _self.numberPicker = null; // 数字
-        })
-    })
-
-
-    // 车型
-    var carTypePicker = new yyan.PopPicker({
-        layer: 1
-    });
-    var carTypeItem=[
-        {
-            value: "0",
-            text: "大型"
-        },
-        {
-            value: "1",
-            text: "中型"
-        },
-        {
-            value: "2",
-            text: "小型"
-        }
-    ];
-
-    carTypePicker.setData(carTypeItem);
-    var carTypeInput = document.getElementById("carType");
-    carTypeInput.addEventListener('tap', function (e) {
-        var _self = this;
-        carTypePicker.show(function (result) {
-            carTypeInput.value = result[0].text;
-            _self.carTypePicker = null; // 状态
-        })
-    })
-
-
-    // 状态
-    var statusItem = [
-        {
-            value: "0",
-            text: "已下达"
-        },
-        {
-            value: "1",
-            text: "未开始"
-        }
-    ];
-
-    var statusPicker = new yyan.PopPicker({
-        layer: 1
-    });
-
-    statusPicker.setData(statusItem); // 设置状态下拉
-    var statusInput = document.getElementById("status");
-    statusInput.addEventListener('tap', function (e) {
-        var _self = this;
-        statusPicker.show(function (result) {
-            statusInput.value = result[0].text;
-            _self.statusPicker = null; // 状态
-        })
-    })
-
-
-    // 开始任务
-    var startButton = document.getElementById('start');
-    startButton.addEventListener('tap', function (event) {
-
-        // todo 对下拉类型的值转换
-        var inputData = myModule.inputValue(['date','numInput','driver','carType','carNum', 'status']);
-        inputData.status = myModule.selectValue2Key(statusItem,inputData.status); // 状态转换
-        inputData.carType = myModule.selectValue2Key(statusItem,inputData.carType); // 车型转换
-
-        myModule.ajaxPost({
-            url: myApi.login, // 提交的 url 地址
-            data: inputData,
-            success: function (data) {
-                console.log("=====data", data);
-                // 跳转页面
-                yyan.openWindow({
-                    url: 'html/main.html',
-                    id: "xxx",
-                    preload: true,
-                });
-
-            },
-            error: function (xhr, type, errorThrown) {
-                console.log("xhr, type, errorThrown", xhr, type, errorThrown)
-            }
-        })
-
-    });
 
 
 </script>
-</body>
-
 </html>
