@@ -72,10 +72,10 @@
             <div></div>
         </form>
         <div style="text-align: center;padding: 5px">
-            <input type="submit" id="start" value="开始任务"/>
-            <input type="submit" value="填报拉酒单"/>
-            <input type="submit" value="拉酒单"/>
-            <input type="submit" value="任务详情"/>
+            <input type="submit" id="start" value="开始"/>
+            <input type="reset" value="重置"/>
+            <!--<input type="submit" value="拉酒单"/>-->
+            <!--<input type="submit" value="任务详情"/>-->
         </div>
     </div>
 
@@ -124,7 +124,7 @@
     var carTypePicker = new yyan.PopPicker({
         layer: 1
     });
-    carTypePicker.setData([
+    var carTypeItem=[
         {
             value: "0",
             text: "大型"
@@ -137,7 +137,9 @@
             value: "2",
             text: "小型"
         }
-    ]);
+    ];
+
+    carTypePicker.setData(carTypeItem);
     var carTypeInput = document.getElementById("carType");
     carTypeInput.addEventListener('tap', function (e) {
         var _self = this;
@@ -149,10 +151,7 @@
 
 
     // 状态
-    var statusPicker = new yyan.PopPicker({
-        layer: 1
-    });
-    statusPicker.setData([
+    var statusItem = [
         {
             value: "0",
             text: "已下达"
@@ -161,7 +160,13 @@
             value: "1",
             text: "未开始"
         }
-    ]);
+    ];
+
+    var statusPicker = new yyan.PopPicker({
+        layer: 1
+    });
+
+    statusPicker.setData(statusItem); // 设置状态下拉
     var statusInput = document.getElementById("status");
     statusInput.addEventListener('tap', function (e) {
         var _self = this;
@@ -177,7 +182,9 @@
     startButton.addEventListener('tap', function (event) {
 
         // todo 对下拉类型的值转换
-        var inputData = myModule.inputValue(['carType', 'status']);
+        var inputData = myModule.inputValue(['date','numInput','driver','carType','carNum', 'status']);
+        inputData.status = myModule.selectValue2Key(statusItem,inputData.status); // 状态转换
+        inputData.carType = myModule.selectValue2Key(statusItem,inputData.carType); // 车型转换
 
         myModule.ajaxPost({
             url: myApi.login, // 提交的 url 地址
@@ -198,7 +205,6 @@
         })
 
     });
-
 
 
 </script>
