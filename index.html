@@ -22,27 +22,6 @@
             background-color: #efeff4;
         }
 
-        h5.yyan-content-padded {
-            margin-left: 3px;
-            margin-top: 20px !important;
-        }
-
-        h5.yyan-content-padded:first-child {
-            margin-top: 12px !important;
-        }
-
-        .yyan-btn {
-            font-size: 16px;
-            padding: 8px;
-            margin: 3px;
-        }
-
-        .ui-alert {
-            text-align: center;
-            padding: 20px 10px;
-            font-size: 16px;
-        }
-
         * {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -93,7 +72,7 @@
             <div></div>
         </form>
         <div style="text-align: center;padding: 5px">
-            <input type="submit" value="开始任务"/>
+            <input type="submit" id="start" value="开始任务"/>
             <input type="submit" value="填报拉酒单"/>
             <input type="submit" value="拉酒单"/>
             <input type="submit" value="任务详情"/>
@@ -102,8 +81,10 @@
 
 </div>
 <script src="js/yyan.min.js"></script>
-<!---->
 <script src="js/yyan.picker.all.js"></script>
+<script src="common/api.js"></script>
+<script src="common/utils.js"></script>
+
 <script>
 
     // 初始化日期
@@ -123,38 +104,17 @@
 
 
     // 数字类型
-    // https://blog.csdn.net/beyond__devil/article/details/83541838
     var numberPicker = new yyan.PopPicker({
         layer: 5,
         noLink: true, // 参数不联动
     });
-    var numItem = [
-        {value: '0', text: '0'},
-        {value: '1', text: '1'},
-        {value: '2', text: '2'},
-        {value: '3', text: '3'},
-        {value: '4', text: '4'},
-        {value: '5', text: '5'},
-        {value: '6', text: '6'},
-        {value: '7', text: '7'},
-        {value: '8', text: '8'},
-        {value: '9', text: '9'},
-        {value: '0', text: '0'},
-    ];
+    var numItem = myModule.inputNumPopItem; // 数字初始化值
     numberPicker.setData([numItem, numItem, numItem, numItem, numItem]);
     var numInput = document.getElementById("numInput");
     numInput.addEventListener('tap', function (e) {
         var _self = this;
         numberPicker.show(function (result) {
-            var numData = null;
-            var numStart = 0;
-            for (var i = 0; i < result.length; i++) {
-                numStart += parseInt(result[i].value) * Math.pow(10, result.length - i - 1);
-            }
-            if (numStart) {
-                numData = numStart;
-            }
-            numInput.value = numData;
+            numInput.value = myModule.inputNum(result); // 获取数字类型值
             _self.numberPicker = null; // 数字
         })
     })
@@ -210,6 +170,35 @@
             _self.statusPicker = null; // 状态
         })
     })
+
+
+    // 开始任务
+    var startButton = document.getElementById('start');
+    startButton.addEventListener('tap', function (event) {
+
+        // todo 对下拉类型的值转换
+        var inputData = myModule.inputValue(['carType', 'status']);
+
+        myModule.ajaxPost({
+            url: myApi.login, // 提交的 url 地址
+            data: inputData,
+            success: function (data) {
+                console.log("=====data", data);
+                // 跳转页面
+                yyan.openWindow({
+                    url: 'html/main.html',
+                    id: "xxx",
+                    preload: true,
+                });
+
+            },
+            error: function (xhr, type, errorThrown) {
+                console.log("xhr, type, errorThrown", xhr, type, errorThrown)
+            }
+        })
+
+    });
+
 
 
 </script>
